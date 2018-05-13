@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    width: 400px;
+    hieght: 70px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #F00;
+}
+
+.btns {
+    width: 200px;
+    height: 30px;
+    margin: 20px auto;
+}
+
+.btns span {
+    display: block;
+    width: 80px;
+    height: 27px;
+    background-color: #036;
+    line-height: 27px;
+    border: 1px solid #eee;
+    border-radius: 7px;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    cursor: pointer;
+}
+
+.btns span:nth-child(1) {
+    float: left;
+}
+
+.btns span:nth-child(2) {
+    float: right;
+}

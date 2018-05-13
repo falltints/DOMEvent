@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event-flow & event-handling</title>
+</head>
+<body>
+<!--事件流：
+事件冒泡（IE，由下而上） & 事件捕获（由上而下） （接受到事件的时间顺序不同）-->
+
+<!--设置事件处理程序的三种方式：
+HTML事件处理程序：直接在HTML标签中设置（缺点：不方便修改）
+DOM0级事件处理程序：
+    通过赋值给HTML元素的相应属性添加（例如：element.onclick = function () {}）
+    清除：element.click = null;
+    注意：当事件作为元素的属性时，一般命名为on + 事件名
+DOM2级事件处理程序（对IE不起作用）：
+    通过element.addEventListener(事件名，回调函数，是否设置为事件捕获（false为事件冒泡）)函数添加
+    注意：一般第三个参数设置为false，这样可以兼容各种浏览器（低版本的IE不支持事件捕获）
+    清除：removeEventListener()，参数要设置的和addEventListener()一样
+    （注意：通过addEventListener添加的事件只能通过removeEventListener去除）
+DOM0级和DOM2级都可以为同一元素的同一事件添加多个事件处理程序-->
+
+<!--IE事件处理程序的绑定：
+attachEvent(事件名，回调函数)
+    注意：事件名要加上on
+detachEvent()-->
+<script>
+    // 能力检测实现兼容浏览器的事件绑定
+    var eventUtil = {
+        addHandler : function (element,type,handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type,handler,false);
+            }else if (element.attachEvent) {
+                element.attachEvent('on' + type,handler);
+            }else {
+                element['on' + type] = handler;
+            }
+        },
+        removeHandler : function (element,type,handler) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type,handler,false);
+            }else if (element.detachEvent) {
+                element.detachEvent('on' + type,handler);
+            }else {
+                element['on' + type] = null;
+            }
+        }
+    }
+</script>
+</body>
+</html>

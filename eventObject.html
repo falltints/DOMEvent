@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eventObject</title>
+</head>
+<body>
+<!--事件处理函数默认有一个参数event
+DOM中event的属性：
+type: 当前函数处理事件的名称 （例如：click）
+target: 事件所绑定元素的类型 （例如：[Object HTMLInputElement]）
+target.nodeName: （例如：INPUT）
+DOM中event的方法：
+stopPropagation(): 阻止事件冒泡  （propagation: 传播）
+preventDefault(): 阻止事件的默认行为 （例如：a标签）-->
+
+<!--IE中event的属性：
+（低版本IE要通过window.event获取到event对象，通常使用event = event || window.event来兼容）
+type: 同上
+srcElement: 同target (可以通过var ele = event.target || event.srcElement来兼容)
+cancelBubble: 设置true可以阻止事件冒泡
+returnValue: 设置为false可以阻止事件的默认行为-->
+
+<script>
+    // 能力检测
+    var eventUtil = {
+        getEvent : function (event) {
+            return event ? event : window.event;
+        },
+        getType :function (event) {
+            return event.type;
+        },
+        getElement : function (event) {
+            return event.target || event.srcElement;
+        },
+        preventDefault : function (event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            }else {
+                event.returnValue = false;
+            }
+        },
+        stopPropagation : function (event) {
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            }else {
+                event.cancelable = true;
+            }
+        }
+    }
+</script>
+</body>
+</html>
